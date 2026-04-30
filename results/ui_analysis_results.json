@@ -1,0 +1,63 @@
+{
+    "data_collected": [
+        "Account Information (email address, devices registered, account status, age)",
+        "Device Information (device serial number, browser type)",
+        "Contact Information (name, email address, physical address, phone number)",
+        "Payment Information (billing address, bank details, credit, debit, or other payment card information)",
+        "Transaction Information (purchases of Apple products and services, transactions facilitated by Apple)",
+        "Fraud Prevention Information (device trust score)",
+        "Usage Data (activity on and use of offerings, app launches, browsing history, search history, product interaction, crash data, performance and other diagnostic data)",
+        "Location Information (precise location for Find My or region-specific services with consent, coarse location)",
+        "Health Information (data relating to health status, physical or mental health/condition, data used to make inferences about or detect health status)",
+        "Fitness Information (details relating to fitness and exercise where shared)",
+        "Financial Information (salary, income, assets, information related to Apple-branded financial offerings)",
+        "Government ID Data (government-issued ID in limited circumstances like wireless account setup, device activation, commercial credit, reservations, or legal requirement)",
+        "Other Information You Provide to Us (content of communications with Apple, customer support interactions, social media contacts)",
+        "Personal data received from other individuals (e.g., if someone sends you a product/gift card, invites you to a service, or shares content)",
+        "Personal data received from businesses or third parties acting at your direction (e.g., mobile carrier data for account activation, loyalty program information)",
+        "Personal data received from Apple Partners (for security and fraud prevention validation)",
+        "Publicly available internet information (crawled by Applebot for features like search and AI models, with measures to reduce personal data)",
+        "Research and development datasets (images, voices, or other data associated with an identifiable person, acquired in accordance with law, without reidentification attempts)"
+    ],
+    "third_party_sharing": [
+        "Apple-affiliated companies",
+        "Service providers who act on Apple's behalf",
+        "Apple partners (who work with Apple to provide products/services, assist in security and fraud prevention)",
+        "Developers and publishers",
+        "Others at your direction (e.g., directing mobile carrier to share data with Apple)",
+        "Third parties (for validation of information for security and fraud prevention)"
+    ],
+    "security_practices": [
+        "User account sign-in and identity verification required to exercise privacy rights and protect personal data security",
+        "Data used for anti-fraud and security purposes (e.g., device trust score, account investigation)",
+        "Prescreening or scanning uploaded content for potentially illegal content (including child sexual exploitation material)",
+        "Measures in place to reduce personal data collected by Applebot and no attempt to connect crawled data to individual users or build profiles",
+        "Private personal data not used to train foundational AI models",
+        "Acquisition and use of R&D datasets in accordance with applicable law, without attempts to reidentify individuals"
+    ],
+    "user_rights": [
+        "Right to know what personal data is collected",
+        "Right to access personal data",
+        "Right to correct personal data",
+        "Right to transfer personal data",
+        "Right to restrict the processing of personal data",
+        "Right to delete personal data",
+        "Right not to be treated in a discriminatory way or receive a lesser degree of service for exercising privacy rights",
+        "Right to withdraw consent at any time where consent is requested for processing",
+        "Right to opt out of processing related to Applebot for foundational AI models",
+        "Right to lodge a complaint with the applicable regulator"
+    ],
+    "red_flags": [
+        "Extensive collection of sensitive personal data categories (e.g., Health Information, Financial Information, Government ID Data, precise Location Information, detailed Usage Data like browsing and search history).",
+        "Broad categories for third-party sharing, including 'partners, developers, and publishers,' which can encompass many entities.",
+        "Reliance on 'legitimate interests' as a legal basis for processing, which can be a broad and vague justification, giving Apple significant discretion.",
+        "Significant limitations on user rights requests (e.g., denial if legally obligated to retain data, for anti-fraud/security purposes, if it jeopardizes others' privacy, is frivolous, vexatious, impractical, or unreasonable).",
+        "Collection of personal data from 'other individuals' (e.g., if someone sends you a gift or shares content) potentially without explicit direct consent from the user.",
+        "Use of algorithms or profiling for decisions that 'significantly affect you,' even with the opportunity for human review, indicating extensive data processing for decision-making.",
+        "Vague data retention periods, stating data is kept 'only for so long as necessary to fulfill the purposes... or as required by law,' which lacks specific timeframes."
+    ],
+    "risk_score": 55,
+    "justification": "The policy provides extensive detail and grants strong user rights (access, deletion, non-discrimination). However, the sheer volume and sensitivity of data collected (including health, financial, government ID, precise location, and detailed usage/browsing history) is substantial. Sharing categories are broad ('partners, developers, publishers'), and the reliance on 'legitimate interests' for data processing, coupled with significant limitations on user rights, contributes to a moderate risk score. While transparent, the depth of data collected and shared elevates privacy concerns.",
+    "final_risk_score": 65,
+    "grade": "D"
+}

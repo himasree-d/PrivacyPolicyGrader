@@ -1,0 +1,64 @@
+{
+    "data_collected": [
+        "Content created (posts, comments, audio)",
+        "Camera content and camera roll settings",
+        "Voice-enabled feature data",
+        "Metadata about content",
+        "Interactions with AI at Meta and related metadata",
+        "Types of content viewed and interaction patterns",
+        "Apps and features used",
+        "Purchases and transactions",
+        "Hashtags used",
+        "Time, frequency, and duration of activities",
+        "Friends, followers, and other connections",
+        "Device characteristics and software",
+        "On-device behavior (e.g., mouse movement, foreground app status)",
+        "Device identifiers and signals",
+        "GPS location and location-related information",
+        "Network connection information",
+        "Cookies and similar technologies",
+        "Information from partners, vendors, and third parties"
+    ],
+    "third_party_sharing": [
+        "Integrated partners",
+        "Advertisers and Audience Network publishers",
+        "Analytics service providers",
+        "Vendors (Measurement, Marketing, Service Providers)",
+        "External researchers",
+        "AI integrations",
+        "Legal requests (law enforcement, government authorities, civil litigants)",
+        "Other Meta Companies (e.g., WhatsApp)",
+        "Potential new owners (in case of business sale or transfer)"
+    ],
+    "security_practices": [
+        "De-identification and aggregation of information",
+        "Anonymization of datasets",
+        "Contractual rules for third-party data use and disclosure",
+        "Product troubleshooting and fixing",
+        "Safety, security, and integrity monitoring"
+    ],
+    "user_rights": [
+        "Access your information",
+        "View and manage information via settings",
+        "Download your information (Data Portability)",
+        "Delete information or account",
+        "Manage ad preferences",
+        "Privacy Checkup tool",
+        "Contact the Data Protection Officer (DPO)",
+        "Contact local Data Protection Authority (DPA)",
+        "Notification before material policy changes"
+    ],
+    "red_flags": [
+        "Manual review: Humans may access and review user information in some cases",
+        "Shadow tracking: Data is collected even if you don't have an account",
+        "Behavioral tracking: Monitoring mouse movements to distinguish humans from bots",
+        "Vague retention: Data kept on a 'case-by-case basis' depending on 'legitimate purposes'",
+        "Cross-company sharing: Extensive data pooling across all Meta Companies (Facebook, Instagram, WhatsApp)",
+        "Off-platform tracking: Collection of 'Off-Meta activity' from third-party partners",
+        "Broad legal sharing: Data may be shared with civil litigants, not just law enforcement"
+    ],
+    "risk_score": 88,
+    "justification": "Meta's policy describes an exhaustive surveillance model that tracks users and non-users across devices, apps, and physical locations. The inclusion of human 'manual review' of data, tracking of granular behavior like mouse movements, and the sharing of data across its massive corporate ecosystem presents a high privacy risk. While user rights for deletion and access are provided, the sheer volume of 'optional' but highly invasive data collection and the use of vague retention periods contribute to a high score.",
+    "final_risk_score": 93,
+    "grade": "F"
+}

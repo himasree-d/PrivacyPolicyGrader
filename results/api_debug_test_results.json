@@ -1,0 +1,58 @@
+{
+    "data_collected": [
+        "Anonymous browser facts",
+        "Usage statistics",
+        "Email address",
+        "Learning progress and certifications",
+        "Developer portfolio details (name, geographic location, personal website link - optional)",
+        "Algorithm challenge code solutions",
+        "Project submissions",
+        "Request metadata (temporary)",
+        "Donor names and personal information"
+    ],
+    "third_party_sharing": [
+        "Amazon Web Services (AWS)",
+        "Microsoft Azure",
+        "MongoDB",
+        "Digital Ocean",
+        "Akamai",
+        "Stripe",
+        "PayPal",
+        "YouTube",
+        "GitHub Sponsors",
+        "Patreon",
+        "CloudFlare",
+        "Netlify",
+        "Auth0",
+        "Google Analytics",
+        "Google (Ads and Authentication)",
+        "GitHub (Authentication)"
+    ],
+    "security_practices": [
+        "No volunteer access to private data",
+        "Full-time staff access restricted to technical support use cases",
+        "Daily emergency database backups deleted after a few days",
+        "Immediate deletion of personal data from servers upon user request",
+        "GDPR compliance features applied globally"
+    ],
+    "user_rights": [
+        "Right to access data",
+        "Right to erase data (right to be forgotten)",
+        "Right to port data (JSON format download)",
+        "Right to rectify data",
+        "Right to object to automated decision-making",
+        "Control over public profile visibility",
+        "Ability to delete entire account",
+        "Ability to opt-out of Google Analytics"
+    ],
+    "red_flags": [
+        "Use of Google Ads (implies third-party tracking for monetization)",
+        "Data sharing with Google/GitHub is required if using social login",
+        "Reliance on numerous US-based third-party infrastructure providers",
+        "Collection of request metadata (though stated as temporary for debugging)"
+    ],
+    "risk_score": 12,
+    "justification": "The policy is exceptionally transparent and user-centric, explicitly extending GDPR protections to all global users and prohibiting the sale of data. The risk score reflects the necessary but inherent data sharing with major US-based cloud providers and the use of Google Ads/Analytics.",
+    "final_risk_score": 12,
+    "grade": "A"
+}

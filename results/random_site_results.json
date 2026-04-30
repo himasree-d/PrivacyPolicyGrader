@@ -1,0 +1,56 @@
+{
+    "data_collected": [
+        "Anonymous usage data",
+        "Browser type",
+        "Email address",
+        "Learning progress and certification status",
+        "Custom developer portfolio details (name, geographic location, personal website link)",
+        "Code solutions for algorithm challenges",
+        "Submitted projects",
+        "Request metadata (temporarily stored for debugging and DDoS prevention)",
+        "Donor names and personal information"
+    ],
+    "third_party_sharing": [
+        "Amazon Web Services",
+        "Microsoft Azure",
+        "MongoDB",
+        "Digital Ocean",
+        "Akamai",
+        "Stripe",
+        "PayPal",
+        "YouTube",
+        "GitHub Sponsors",
+        "Patreon",
+        "CloudFlare",
+        "Netlify",
+        "Auth0",
+        "Google Analytics",
+        "Google (Ads and Sign-in)",
+        "GitHub (Sign-in)"
+    ],
+    "security_practices": [
+        "Restricted staff access to databases (technical support only)",
+        "No volunteer access to private data",
+        "Daily emergency backups deleted after a few days",
+        "GDPR compliance extended to all users globally",
+        "Immediate deletion of data from active servers upon user request"
+    ],
+    "user_rights": [
+        "Right to download all data in JSON format",
+        "Right to set profile data to private",
+        "Right to delete specific data or the entire account",
+        "Right to access, rectify, and port data",
+        "Right to object to automated decision-making",
+        "Right to opt-out of Google Analytics"
+    ],
+    "red_flags": [
+        "Developer portfolio is public by default",
+        "Uses Google Ads for monetization",
+        "Data is shared with Google/GitHub if social login is used",
+        "Vague 'anonymous data' collection for demographics"
+    ],
+    "risk_score": 15,
+    "justification": "The policy is exceptionally transparent and user-friendly. They explicitly state they do not sell data, offer a clear data portability option (JSON), and apply high GDPR standards to all users. The score is slightly elevated only due to the presence of Google Ads and the fact that profiles are public by default.",
+    "final_risk_score": 20,
+    "grade": "A"
+}

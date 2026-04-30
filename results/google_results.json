@@ -1,0 +1,73 @@
+{
+    "data_collected": [
+        "Name",
+        "Password",
+        "Phone number (optional)",
+        "Payment information (optional)",
+        "Email address",
+        "Content created, uploaded, or received (emails, photos, videos, docs, spreadsheets, YouTube comments)",
+        "Unique identifiers (tied to browser, application, or device)",
+        "Browser type and settings",
+        "Device type and settings",
+        "Operating system",
+        "Mobile network information (carrier name, phone number)",
+        "Application version number",
+        "IP address",
+        "Crash reports",
+        "System activity",
+        "Date, time, and referrer URL of requests",
+        "Installed apps (on Android devices with Google apps)",
+        "Android device usage information",
+        "Search terms",
+        "Videos watched",
+        "Views and interactions with content and ads",
+        "Voice and audio information",
+        "Purchase activity",
+        "People with whom you communicate or share content",
+        "Activity on third-party sites and apps that use Google services",
+        "Chrome browsing history (if synced with Google Account)",
+        "Call and message log information (phone number, calling-party number, receiving-party number, forwarding numbers, sender and recipient email address, time and date of calls and messages, duration of calls, routing information, and types and volumes of calls and messages, if using services for calls/messages)",
+        "Location information (GPS and other sensor data from device, IP address, activity on Google services like searches/labeled places, information about nearby Wi-Fi access points, cell towers, and Bluetooth-enabled devices)",
+        "Information from publicly accessible sources (e.g., local newspaper mentions)",
+        "Information from trusted partners (directory services, marketing partners, security partners, partners for advertising and research services)",
+        "Data collected via cookies, pixel tags, local storage (browser web storage, application data caches), databases, and server logs"
+    ],
+    "third_party_sharing": [
+        "Advertisers (personally identifiable information like phone number, only when user explicitly asks/acts, e.g., 'tap to call' on an ad)",
+        "Other users (publicly visible Google Account information like name and photo, if they have your email or other identifying info)",
+        "Third-party apps and sites that integrate Google services (e.g., ads, analytics, embedded Google Maps, implying data interaction for service functionality and measurement)",
+        "Information about activity from sites or apps that use Google's ad or analytics services may be linked with activity from other sites or apps that use Google services (for advertisers to understand campaign performance)"
+    ],
+    "security_practices": [
+        "Work hard to protect your information",
+        "Use information to help improve the safety and reliability of services",
+        "Detecting, preventing, and responding to fraud, abuse, security risks, and technical issues"
+    ],
+    "user_rights": [
+        "Understand what information is collected and why",
+        "Update information",
+        "Manage information (via Google Account and Privacy Checkup)",
+        "Export information",
+        "Delete information",
+        "Adjust privacy settings to control data collection and usage",
+        "Manage activity information (via Google Account activity controls)",
+        "Turn Android device location on or off",
+        "Turn on/off Timeline for location tracking",
+        "Control what information is used for personalized ads (via My Ad Center)",
+        "Consent for using information for purposes not covered in the Privacy Policy"
+    ],
+    "red_flags": [
+        "Extremely broad and extensive data collection across almost all aspects of user interaction, device information, and online activity.",
+        "Pervasive cross-service and cross-device tracking and data association.",
+        "Collection of call and message log information, which is highly sensitive.",
+        "Automated systems analyze user content (emails, docs, photos, etc.) for personalization, ad targeting, and abuse detection.",
+        "Collection of information from publicly accessible sources and various third-party partners extends data scope beyond direct user interaction.",
+        "Security practices are mentioned generally (e.g., 'work hard to protect') but lack specific technical details or measures in the provided text.",
+        "Use of unique identifiers to track users even when signed out of a Google Account.",
+        "While PII sharing with advertisers generally requires user action, the mechanism (e.g., 'tap to call') can be easily overlooked, leading to unexpected data sharing."
+    ],
+    "risk_score": 88,
+    "justification": "The policy describes an exceptionally broad scope of data collection, encompassing personal details, activity logs, location data, device information, and even call/message logs. It explicitly details cross-service and cross-device tracking, automated content analysis, and collection from third parties and public sources. While user controls are mentioned for managing some aspects like ads and activity, the default and baseline collection is extensive. The section on security practices is vague, only stating general commitments rather than specific measures, contributing to a high privacy risk score.",
+    "final_risk_score": 88,
+    "grade": "F"
+}
