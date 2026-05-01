@@ -28,6 +28,5 @@ Traditional rule-based scrapers fail to understand the nuance and context of leg
 *   **Scalability:** Processing thousands of words in seconds to provide real-time feedback.
 
 ---
-**Prepared by:** AI Research Assistant
 **Project:** Privacy Policy Grader
 **Evaluation Standards:** Academic GenAI Evaluation Framework
