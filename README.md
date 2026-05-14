@@ -254,21 +254,21 @@ This table makes explicit what was engineered by the team versus what the LLM pr
 
 | Component | Our Code | Gemini LLM |
 |:----------|:--------:|:----------:|
-| Readability formulas (FRE, FKGL, SMOG, ARI, Coleman-Liau) | ✅ | ❌ |
-| Custom syllable counter | ✅ | ❌ |
-| Legal jargon dictionary (150+ terms) + density analysis | ✅ | ❌ |
-| Dark pattern detection (15+ categories, severity scores) | ✅ | ❌ |
-| VADER sentiment analysis | ✅ | ❌ |
-| Passive voice % + type-token ratio | ✅ | ❌ |
-| Multi-strategy web scraper + Selenium fallback | ✅ | ❌ |
-| Policy URL auto-discovery | ✅ | ❌ |
-| 5-dimension weighted grading engine | ✅ | ❌ |
-| ClaimVerifier (difflib fuzzy-match hallucination guard) | ✅ | ❌ |
-| SQLAlchemy ORM + CRUD + benchmarks | ✅ | ❌ |
-| HTML5 Canvas radar chart + animated grade arc | ✅ | ❌ |
-| Identifying specific data types & sharing recipients | ❌ | ✅ |
-| Extracting user rights from raw text | ❌ | ✅ |
-| Generating plain-English verdict summaries | ❌ | ✅ |
+| Readability formulas (FRE, FKGL, SMOG, ARI, Coleman-Liau) | ✔︎ | 𐄂 |
+| Custom syllable counter | ✔︎ | 𐄂 |
+| Legal jargon dictionary (150+ terms) + density analysis | ✔︎ | 𐄂 |
+| Dark pattern detection (15+ categories, severity scores) | ✔︎ | 𐄂 |
+| VADER sentiment analysis | ✔︎ | 𐄂 |
+| Passive voice % + type-token ratio | ✔︎ | 𐄂 |
+| Multi-strategy web scraper + Selenium fallback | ✔︎ | 𐄂 |
+| Policy URL auto-discovery | ✔︎ | 𐄂 |
+| 5-dimension weighted grading engine | ✔︎ | 𐄂 |
+| ClaimVerifier (difflib fuzzy-match hallucination guard) | ✔︎ | 𐄂 |
+| SQLAlchemy ORM + CRUD + benchmarks | ✔︎ | 𐄂 |
+| HTML5 Canvas radar chart + animated grade arc | ✔︎ | 𐄂 |
+| Identifying specific data types & sharing recipients | 𐄂 | ✔︎ |
+| Extracting user rights from raw text | 𐄂 | ✔︎ |
+| Generating plain-English verdict summaries | 𐄂 | ✔︎ |
 
 </div>
 
