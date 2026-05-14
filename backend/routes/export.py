@@ -80,7 +80,7 @@ def _build_html_report(row: dict) -> str:
 
     rights_rows = "".join(
         f"""<tr>
-          <td style="font-weight:600;font-size:.88rem">{k.replace('_',' ').replace(' ','\xa0',1).title()}</td>
+          <td style="font-weight:600;font-size:.88rem">{k.replace('_',' ').replace(' ',chr(160),1).title()}</td>
           <td style="font-size:.85rem">{
             f'<span style="color:#1E6838;font-weight:600">✓ ' + str(v)[:100] + '</span>'
             if v else
