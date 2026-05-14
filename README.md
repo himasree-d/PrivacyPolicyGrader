@@ -1,257 +1,144 @@
-# 🔍 Privacy Policy Grader
+# 🔒 Privacy Policy Grader
 
-> **AI + Custom NLP** — Grade any privacy policy for transparency, readability, user rights, and legal compliance in seconds.
+> **CS5202 · GenAI and LLM · Spring 2026 · Group 22**
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://python.org)
-[![Flask](https://img.shields.io/badge/framework-Flask-lightgrey.svg)](https://flask.palletsprojects.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+An AI-powered web application that automatically analyses, grades, and explains privacy policies. Paste any URL or raw policy text and get an instant A–F grade with a full breakdown — what data is collected, who it's shared with, your rights, dark patterns, and GDPR compliance.
 
-> **Note on Stack Evolution**: The project stack evolved from the initially planned FastAPI+React to Flask+Jinja2. This decision was made to maximize Python-dominant backend engineering and simplify the architecture for a robust, production-ready demonstration.
+**Live Demo → [privacy-policy-grader.onrender.com](https://privacy-policy-grader.onrender.com)**
 
 ---
 
-## 🗂️ Table of Contents
-1. [Overview](#overview)
-2. [OUR CODE vs LLM — Contribution Breakdown](#our-code-vs-llm)
-3. [Architecture](#architecture)
-4. [Grading Methodology](#grading-methodology)
-5. [API Documentation](#api-documentation)
-6. [Getting Started](#getting-started)
-7. [Project Structure](#project-structure)
-8. [Running Tests](#running-tests)
+## What It Does
 
----
+Privacy policies average 18–30 minutes to read and require post-graduate reading comprehension. Nobody reads them. This tool fixes that — it reads the policy, grades it, and tells you exactly what to worry about in under 30 seconds.
 
-## Overview
-
-Privacy Policy Grader analyses privacy policies on **5 dimensions**, computing a weighted 0–100 score and letter grade (A–F). It combines a **custom NLP pipeline** (readability formulas, legal jargon detection, dark pattern recognition, fuzzy-match claim verification) with **Google Gemini** for semantic text comprehension.
-
-### Key Features
-- 🔬 **18+ NLP metrics** computed via pure Python — no LLM
-- 🕷️ **Smart web scraper** with multi-strategy policy URL discovery and Selenium fallback
-- 🤖 **Single-file LLM boundary** — Gemini is called in exactly one file (`llm_service.py`)
-- 🛡️ **Hallucination guard** — `ClaimVerifier` fuzzy-matches every AI claim against source text
-- 📊 **Pure Canvas charts** — radar chart and grade arc, no Chart.js dependency
-- 🏭 **Industry benchmarks** — seeded data for 12 companies across 4 industries
-- ⚖️ **Side-by-side comparison** — compare any two policies
-- ⚡ **Demo Mode** — fully functional without a Gemini API key
-
----
-
-## OUR CODE vs LLM
-
-This table explicitly separates what our team engineered versus what the LLM provides. This is the core value proposition for a GenAI course project.
-
-| Component | OUR CODE (Python) | LLM (Gemini) |
-|:----------|:------------------|:-------------|
-| **Readability** | Flesch-Kincaid, SMOG, ARI, Coleman-Liau — implemented from scratch with custom syllable counter | ❌ Not used |
-| **Jargon Detection** | Dictionary of 150+ legal/privacy/technical terms with regex word-boundary matching and density calculation | ❌ Not used |
-| **Dark Pattern Detection** | 15+ categories with `@dataclass PatternSpec`, severity scores, regex rules | ❌ Not used |
-| **Text Metrics** | VADER sentiment, passive voice %, type-token ratio, clause completeness, paragraph structure | ❌ Not used |
-| **Web Scraping** | BeautifulSoup4 boilerplate removal (nav/cookie banners/ads), section splitting by headings, Selenium fallback | ❌ Not used |
-| **URL Discovery** | Multi-strategy: path heuristics → homepage crawling → robots.txt scanning | ❌ Not used |
-| **Grading Engine** | 5-dimension weighted scoring, 9 sub-scorers per dimension, grade boundary mapping | ❌ Not used |
-| **Claim Verification** | `difflib.SequenceMatcher` fuzzy matching with confidence scores and hallucination flagging | ❌ Not used |
-| **Database** | SQLAlchemy ORM, CRUD, benchmarks, grade distribution, export | ❌ Not used |
-| **Frontend Charts** | Pure HTML5 Canvas radar chart + animated arc grade card | ❌ Not used |
-| **Data Extraction** | ❌ Not used | ✅ Identifies specific data types, sharing recipients, user rights, and red flags from raw text |
-| **Plain-English Summary** | ❌ Not used | ✅ Synthesises a human-readable verdict paragraph |
+- **Analyse by URL** — paste any privacy policy URL and the scraper extracts the text
+- **Analyse by text** — paste raw policy text directly (works offline with the sample files)
+- **Letter grade A–F** — weighted across 5 dimensions with full sub-score breakdown
+- **Trust Score** — composite 0–100 score penalising dark patterns and unverified LLM claims
+- **Red flags** — severity-ranked issues with exact quotes from the policy
+- **Dark pattern detection** — 15 manipulation categories detected by pure regex, no LLM
+- **GDPR lawful basis classifier** — maps stated data purposes to GDPR Article 6 bases
+- **Hallucination verification** — every LLM claim cross-referenced against original text
+- **Compare mode** — side-by-side radar chart comparison of two policies
+- **Version history** — tracks grade changes over time for the same domain
+- **Industry benchmarks** — positions each policy against Technology, Social Media, E-Commerce averages
+- **Export report** — download a full text or HTML report
 
 ---
 
 ## Architecture
 
 ```
-URL Input
-    │
-    ▼
-┌─────────────────┐
-│  Scraper Service │  ← OUR CODE: BeautifulSoup + Selenium + URL heuristics
-│  scraper.py      │
-└────────┬────────┘
-         │ clean policy text + sections
-         ▼
-┌─────────────────────┐
-│  Preprocessor        │  ← OUR CODE: 18+ NLP metrics (NLTK, textstat, regex)
-│  preprocessor.py     │
-└────────┬────────────┘
-         │ metrics dict
-         ├──────────────────────────────────────────────┐
-         ▼                                              ▼
-┌──────────────────┐                        ┌──────────────────────┐
-│  LLM Service      │  ← GEMINI API ONLY    │  Grading Engine       │  ← OUR CODE
-│  llm_service.py   │                        │  grading_engine.py    │
-└────────┬─────────┘                        └──────────┬───────────┘
-         │ structured findings                          │ dimension scores
-         │                                              │
-         ▼                                              │
-┌──────────────────┐                                   │
-│  Claim Verifier   │  ← OUR CODE: difflib fuzzy match  │
-│  verifier.py      │                                   │
-└────────┬─────────┘                                   │
-         │ verification confidence                       │
-         └──────────────────┬────────────────────────────┘
-                            │
-                            ▼
-                   ┌─────────────────┐
-                   │  Database        │  ← OUR CODE: SQLAlchemy ORM
-                   │  db_manager.py   │
-                   └────────┬────────┘
-                            │ JSON response
-                            ▼
-                   ┌─────────────────┐
-                   │  Flask API       │  ← OUR CODE: /api/analyze
-                   │  routes/         │
-                   └────────┬────────┘
-                            │
-                            ▼
-                   ┌─────────────────┐
-                   │  Frontend        │  ← OUR CODE: Canvas charts, vanilla JS
-                   │  static/ + tmpl/ │
-                   └─────────────────┘
+                        ┌─────────────────────────────────────────┐
+                        │              User Request                │
+                        └───────────────────┬─────────────────────┘
+                                            │
+                        ┌───────────────────▼─────────────────────┐
+                        │           Flask Backend (Python)         │
+                        │                                          │
+                        │  ┌──────────┐    ┌────────────────────┐ │
+                        │  │ Scraper  │    │  Paste-text mode   │ │
+                        │  │(BS4+lxml)│    │  (skip scraper)    │ │
+                        │  └────┬─────┘    └─────────┬──────────┘ │
+                        │       └──────────┬──────────┘            │
+                        │                  │                        │
+                        │  ┌───────────────▼───────────────────┐   │
+                        │  │     PolicyPreprocessor (OUR CODE)  │   │
+                        │  │  18+ NLP metrics · NLTK · textstat │   │
+                        │  │  ReadabilityAnalyzer (from scratch) │   │
+                        │  │  JargonDetector (150+ terms)        │   │
+                        │  │  DarkPatternDetector (15 categories)│   │
+                        │  │  GDPRLawfulBasisClassifier          │   │
+                        │  └───────────────┬───────────────────┘   │
+                        │                  │ metrics injected       │
+                        │  ┌───────────────▼───────────────────┐   │
+                        │  │    llm_service.py  ◄── ONLY LLM   │   │
+                        │  │    Gemini 1.5 Flash · JSON mode    │   │
+                        │  │    Chain-of-thought prompt         │   │
+                        │  └───────────────┬───────────────────┘   │
+                        │                  │                        │
+                        │  ┌───────────────▼───────────────────┐   │
+                        │  │   ClaimVerifier  (OUR CODE)        │   │
+                        │  │   difflib fuzzy match · citations  │   │
+                        │  │   Hallucination detection          │   │
+                        │  │   Cross-signal fusion (3 sources)  │   │
+                        │  └───────────────┬───────────────────┘   │
+                        │                  │                        │
+                        │  ┌───────────────▼───────────────────┐   │
+                        │  │   GradingEngine  (OUR CODE)        │   │
+                        │  │   5-dimension weighted scoring     │   │
+                        │  │   Trust Score composite formula    │   │
+                        │  └───────────────┬───────────────────┘   │
+                        │                  │                        │
+                        │        SQLite · SQLAlchemy ORM            │
+                        └───────────────────┬─────────────────────┘
+                                            │
+                        ┌───────────────────▼─────────────────────┐
+                        │    Frontend (HTML · CSS · Vanilla JS)    │
+                        │  Radar chart (pure Canvas) · Grade card  │
+                        │  Dark mode · Paste tabs · Export · Diff  │
+                        └─────────────────────────────────────────┘
 ```
+
+---
+
+## Our Code vs LLM — What We Built
+
+This is the most important table for understanding the project. The LLM does one thing: semantic comprehension of legal text. Everything else is our custom Python.
+
+| Component | Our Code | LLM (Gemini) |
+|---|---|---|
+| Web scraping + content extraction | ✅ BeautifulSoup + lxml | — |
+| Flesch-Kincaid readability (from scratch) | ✅ Custom syllable counter | — |
+| 150+ legal jargon detection | ✅ Categorised dictionary | — |
+| 15-category dark pattern detector | ✅ Regex + PatternSpec dataclass | — |
+| GDPR Article 6 lawful basis classifier | ✅ Keyword mapping | — |
+| 18+ NLP preprocessing metrics | ✅ NLTK + textstat | — |
+| 5-dimension weighted grading engine | ✅ Custom scoring | — |
+| Trust Score composite formula | ✅ Custom formula | — |
+| Claim verification + hallucination detection | ✅ difflib fuzzy match | — |
+| Cross-signal fusion (3 sources) | ✅ Escalation logic | — |
+| Semantic comprehension of legal text | — | ✅ Single prompt |
+| Entity extraction (data types, recipients) | — | ✅ JSON mode |
+| User rights identification | — | ✅ Structured output |
+| Red flag generation | — | ✅ With verification |
+
+**Line count breakdown:** ~3,200 lines of custom Python · ~800 lines of Vanilla JS · ~1,800 lines of CSS · 1 LLM service file (220 lines)
 
 ---
 
 ## Grading Methodology
 
-The overall score is a **weighted average** of 5 dimensions:
+Each policy is scored across 5 weighted dimensions:
 
-| Dimension | Weight | What We Measure |
-|:----------|:------:|:----------------|
-| Data Collection Transparency | **25%** | Types enumerated, purpose stated, clear categorisation |
-| Sharing Disclosure | **25%** | Recipients named, opt-out availability, per-recipient purposes |
-| User Rights | **20%** | Access, deletion, portability, correction mechanisms |
-| Readability | **15%** | Flesch Reading Ease, section structure, jargon density |
-| Compliance | **15%** | GDPR alignment, CCPA alignment, COPPA consideration |
+| Dimension | Weight | What It Measures |
+|---|---|---|
+| Data Collection Transparency | 25% | Are all data types named? Is purpose stated per type? |
+| Sharing & Disclosure | 25% | Are third parties named? Is opt-out available? |
+| User Rights | 20% | Access, deletion, portability, correction mechanisms |
+| Readability | 15% | Flesch-Kincaid grade, jargon density, section structure |
+| Compliance | 15% | GDPR alignment, CCPA alignment, COPPA consideration |
 
-Each dimension has **3 sub-scorers** (0–10 each), averaged to a 0–100 dimension score. The overall score is the weighted sum of all dimension scores.
+**Grade thresholds:** A ≥ 90 · B ≥ 80 · C ≥ 70 · D ≥ 60 · F < 60
 
-**Grade Thresholds:**
-
-| Grade | Score Range | Interpretation |
-|:-----:|:-----------:|:---------------|
-| **A** | 90–100 | Excellent — transparent and user-friendly |
-| **B** | 80–89 | Good — meets most modern standards |
-| **C** | 70–79 | Adequate — significant room for improvement |
-| **D** | 60–69 | Poor — several major issues |
-| **F** | 0–59 | Very Poor — fails basic privacy standards |
+**Trust Score** = `overall_score − dark_pattern_penalty (0–25) + verification_bonus (0–10) − red_flag_penalty (2pts each, capped at 20)`
 
 ---
 
-## API Documentation
+## Prompt Engineering Evolution
 
-All endpoints return JSON with envelope `{"success": bool, "data": ..., "error": ...}`.
+The `prompt_experiments.ipynb` notebook documents 5 prompt versions:
 
-### `POST /api/analyze`
-Analyse a single privacy policy URL.
+| Version | Approach | Key Improvement |
+|---|---|---|
+| V1 | Naive — "analyse this policy" | Baseline, unstructured output |
+| V2 | Structured JSON output | Consistent parseable response |
+| V3 | Chain-of-thought | Better reasoning, fewer hallucinations |
+| V4 | Few-shot examples | Improved sensitivity classification |
+| V5 | Pre-computed metrics injection | LLM focuses only on semantic comprehension |
 
-**Request Body:**
-```json
-{ "url": "https://example.com/privacy", "force_refresh": false }
-```
-
-**Response (200 OK):**
-```json
-{
-  "success": true,
-  "data": {
-    "url": "https://example.com/privacy",
-    "company_name": "Example",
-    "grade": "B",
-    "overall_score": 84.2,
-    "dimension_scores": {
-      "data_collection_transparency": 88,
-      "sharing_disclosure": 82,
-      "user_rights": 90,
-      "readability": 72,
-      "compliance": 88
-    },
-    "findings": { "data_collected": [...], "data_shared": [...], "user_rights": {...}, "red_flags": [...] },
-    "metrics": { "word_count": 3200, "flesch_reading_ease": 42.1, "jargon_density": 8.4, ... },
-    "red_flags": [...],
-    "dark_pattern_score": 28.5,
-    "verification": { "overall_confidence": 0.87, "hallucination_count": 1 },
-    "processing_time_seconds": 6.2,
-    "cached": false
-  }
-}
-```
-
-**Errors:**
-| Code | Reason |
-|------|--------|
-| 400 | Missing or invalid `url` field |
-| 422 | Policy text could not be scraped |
-| 429 | Rate limit exceeded (60 req/min) |
-| 500 | Internal server error |
-
----
-
-### `POST /api/compare`
-Compare two policies side by side.
-
-**Request Body:**
-```json
-{ "urls": ["https://a.com/privacy", "https://b.com/privacy"] }
-```
-
-**Response:** Returns `policy_a`, `policy_b`, `winner`, `score_delta`, `key_differences[]`, `benchmark_comparison`.
-
----
-
-### `GET /api/benchmarks`
-Returns all industry benchmarks, grade distribution, and recent analyses.
-
-### `GET /api/benchmarks/<industry>`
-Returns benchmark data for a specific industry (e.g. `Technology`, `Social Media`).
-
-### `GET /api/health`
-Health check. Returns `{"status": "ok", "demo_mode": bool}`.
-
----
-
-## Getting Started
-
-### Prerequisites
-- Python 3.10+
-- Google Chrome (for Selenium JS-rendering fallback)
-
-### 1 — Install
-```bash
-cd privacy-policy-grader/backend
-pip install -r requirements.txt
-```
-
-### 2 — Configure
-```bash
-cp .env.example .env
-# Add your GEMINI_API_KEY to .env
-# Leave it blank to run in Demo Mode (mock responses, no API needed)
-```
-
-### 3 — Download NLTK data
-```bash
-python -c "import nltk; nltk.download('punkt'); nltk.download('vader_lexicon')"
-```
-
-### 4 — Seed the database
-```bash
-python -c "from database.seed_data import seed_all; seed_all()"
-```
-
-### 5 — Run
-```bash
-python app.py
-# Open http://localhost:5000
-```
-
-### Offline Demo (no internet required)
-Use the sample files in `samples/`:
-```bash
-# Paste the content of samples/simple_privacy.txt into the text area
-# or use the URL: file:///path/to/samples/google_privacy.txt
-```
+The production prompt (V5) injects 18+ pre-computed metrics — word count, Flesch score, dark pattern score, jargon density — so Gemini doesn't waste tokens re-counting things our NLP already computed precisely.
 
 ---
 
@@ -259,74 +146,180 @@ Use the sample files in `samples/`:
 
 ```
 privacy-policy-grader/
+├── Procfile                        # Render/gunicorn start command
+├── render.yaml                     # Render deployment config
+├── runtime.txt                     # Python 3.11.9
+├── prompt_experiments.ipynb        # Prompt engineering evolution (V1→V5)
+│
 ├── backend/
-│   ├── app.py                  # Flask app factory (CORS, blueprints, middleware)
-│   ├── config.py               # Config from .env (grading weights, demo mode)
+│   ├── app.py                      # Flask app factory + blueprints
+│   ├── config.py                   # All configuration + grade thresholds
 │   ├── requirements.txt
-│   ├── .env.example
-│   ├── analyzers/              # OUR CODE — pure NLP, zero LLM
-│   │   ├── readability.py      # 5 readability formulas from scratch
-│   │   ├── jargon_detector.py  # 150+ term dictionary, density analysis
-│   │   ├── dark_patterns.py    # 15+ regex pattern categories
-│   │   └── text_metrics.py     # VADER sentiment, clause checks, structure score
-│   ├── database/
-│   │   ├── models.py           # SQLAlchemy ORM (Analysis, Benchmark)
-│   │   ├── db_manager.py       # All CRUD operations
-│   │   └── seed_data.py        # 12 companies × 4 industries
-│   ├── routes/
-│   │   ├── analyze.py          # POST /api/analyze — full pipeline
-│   │   ├── compare.py          # POST /api/compare
-│   │   └── benchmarks.py       # GET /api/benchmarks
+│   │
 │   ├── services/
-│   │   ├── scraper.py          # BeautifulSoup + Selenium scraper
-│   │   ├── preprocessor.py     # 18+ NLP metrics aggregator
-│   │   ├── llm_service.py      # ← ONLY file that calls Gemini
-│   │   ├── grading_engine.py   # Weighted 5-dimension scoring
-│   │   └── verifier.py         # difflib fuzzy-match hallucination guard
-│   └── utils/
-│       ├── text_cleaner.py     # HTML → clean text pipeline
-│       └── url_validator.py    # URL validation + policy discovery
+│   │   ├── scraper.py              # BS4 + lxml policy extraction
+│   │   ├── preprocessor.py         # 18+ NLP metrics pipeline
+│   │   ├── llm_service.py          # ← ONLY file that calls Gemini
+│   │   ├── grading_engine.py       # 5-dimension weighted scoring
+│   │   └── verifier.py             # Hallucination detection + cross-signal fusion
+│   │
+│   ├── analyzers/
+│   │   ├── readability.py          # Flesch-Kincaid from scratch
+│   │   ├── jargon_detector.py      # 150+ legal terms
+│   │   ├── dark_patterns.py        # 15 manipulation categories
+│   │   ├── gdpr_classifier.py      # GDPR Article 6 lawful basis mapper
+│   │   └── text_metrics.py         # Type-token ratio, sentiment, structure
+│   │
+│   ├── routes/
+│   │   ├── analyze.py              # POST /api/analyze, POST /api/analyze/text, GET /api/history
+│   │   ├── compare.py              # POST /api/compare
+│   │   ├── benchmarks.py           # GET /api/benchmarks
+│   │   └── export.py               # GET /api/export
+│   │
+│   ├── database/
+│   │   ├── models.py               # SQLAlchemy models (Analysis, Benchmark)
+│   │   ├── db_manager.py           # CRUD + auto-seed on first boot
+│   │   └── seed_data.py            # 12 pre-analysed companies, 4 industries
+│   │
+│   ├── utils/
+│   │   ├── text_cleaner.py         # HTML → clean plain text
+│   │   └── url_validator.py        # URL validation + privacy page detection
+│   │
+│   └── scripts/
+│       ├── analyze_batch.py        # CLI: analyse multiple URLs → CSV
+│       └── evaluate_ground_truth.py # Compare grades vs expert annotations
+│
 ├── frontend/
-│   ├── templates/index.html    # Jinja2 single-page app
+│   ├── templates/index.html        # Jinja2 — full single-page UI
 │   └── static/
-│       ├── css/style.css       # Full dark-mode design system
+│       ├── css/style.css           # Design system · dark mode · animations
 │       └── js/
-│           ├── app.js          # Main controller
-│           ├── radarChart.js   # Pure Canvas radar chart
-│           ├── gradeCard.js    # Animated arc grade display
-│           ├── redFlags.js     # Accordion renderer
-│           └── comparison.js   # Side-by-side comparison renderer
-├── tests/
-│   ├── test_readability.py
-│   ├── test_jargon_detector.py
-│   ├── test_dark_patterns.py
-│   ├── test_grading_engine.py
-│   └── test_verifier.py
+│           ├── app.js              # Main controller + paste-text + history
+│           ├── gradeCard.js        # Animated canvas grade display
+│           ├── radarChart.js       # Pure Canvas radar (no Chart.js)
+│           ├── redFlags.js         # Severity-ranked expandable flags
+│           └── comparison.js       # Side-by-side diff + radar overlay
+│
 ├── samples/
 │   ├── google_privacy.txt
 │   ├── facebook_privacy.txt
 │   ├── amazon_privacy.txt
-│   └── simple_privacy.txt      # Model A-grade policy for comparison
-├── prompt_experiments.ipynb    # Prompt engineering iteration (V1→V5)
-└── README.md
+│   ├── simple_privacy.txt
+│   └── ground_truth.csv            # Expert-annotated grades for evaluation
+│
+└── tests/
+    ├── conftest.py                 # Fixtures + mocked LLM
+    ├── test_readability.py         # 12 tests
+    ├── test_jargon_detector.py     # 9 tests
+    ├── test_dark_patterns.py       # 9 tests
+    ├── test_grading_engine.py      # 9 tests
+    ├── test_verifier.py            # 9 tests
+    └── test_routes.py              # 5 endpoint tests
 ```
+
+---
+
+## API Reference
+
+### `POST /api/analyze`
+Analyse a policy by URL.
+```json
+Request:  { "url": "https://example.com/privacy" }
+Response: { "success": true, "data": { "grade": "B", "overall_score": 82.4, "trust_score": 76.1, "dimension_scores": {...}, "red_flags": [...], "metrics": {...} } }
+```
+
+### `POST /api/analyze/text`
+Analyse pasted policy text directly — no internet required.
+```json
+Request:  { "text": "Full policy text...", "company_name": "Acme", "source_url": "https://acme.com" }
+Response: { "success": true, "data": { ... } }
+```
+
+### `POST /api/compare`
+Side-by-side comparison of two policies.
+```json
+Request:  { "url_a": "https://google.com/privacy", "url_b": "https://apple.com/privacy" }
+Response: { "success": true, "data": { "policy_a": {...}, "policy_b": {...}, "comparison": {...} } }
+```
+
+### `GET /api/history/<domain>`
+Version diff tracker — grade changes over time.
+```
+GET /api/history/google.com
+Response: { "versions": [{ "grade": "B", "delta": { "summary": "Grade improved from C to B (+8.3 pts)" } }] }
+```
+
+### `GET /api/benchmarks`
+Industry average grades and dimension scores.
+
+### `GET /api/export?url=<url>&format=text|html`
+Download full analysis report.
+
+---
+
+## Setup — Run Locally
+
+```bash
+# 1. Clone
+git clone https://github.com/YOUR_USERNAME/privacy-policy-grader.git
+cd privacy-policy-grader
+
+# 2. Install dependencies
+pip install -r backend/requirements.txt
+
+# 3. Set up environment
+cp backend/.env.example backend/.env
+# Edit backend/.env and add your Gemini API key
+# Get a free key at: aistudio.google.com
+
+# 4. Run
+cd backend
+python app.py
+
+# 5. Open http://localhost:5000
+```
+
+**Demo mode:** If no API key is set, the app runs in demo mode with realistic mock responses — all custom NLP features still work.
 
 ---
 
 ## Running Tests
 
 ```bash
-cd backend
-pytest ../tests/ -v
+cd privacy-policy-grader
+pytest tests/ -v
 ```
 
-Expected output: **23 tests passed** across 5 test files covering all custom NLP modules.
+Expected: 53 tests across 6 files, all passing.
 
-### Test Coverage Summary
-| File | Tests | What's Covered |
-|------|------:|----------------|
-| `test_readability.py` | 8 | FRE, FKGL, syllable counter, all 5 formulas |
-| `test_jargon_detector.py` | 9 | Dictionary matching, density, per-section |
-| `test_dark_patterns.py` | 9 | 15+ pattern categories, severity, structural checks |
-| `test_grading_engine.py` | 9 | Grade boundaries, dimension scores, edge cases |
-| `test_verifier.py` | 9 | Fuzzy matching, hallucination detection, confidence |
+---
+
+## Batch CLI
+
+Analyse multiple URLs from the command line:
+
+```bash
+cd backend
+python scripts/analyze_batch.py --urls https://google.com/privacy https://apple.com/privacy --output results.csv
+```
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Backend | Python 3.11 · Flask 3.0 · SQLAlchemy 2.0 |
+| NLP | NLTK 3.8 · textstat 0.7 · custom analyzers |
+| Scraping | BeautifulSoup4 · lxml · requests |
+| LLM | Google Gemini 1.5 Flash (JSON mode) |
+| Database | SQLite (auto-seeded) |
+| Frontend | HTML5 · CSS3 · Vanilla JS · Canvas API |
+| Testing | pytest 7.4 |
+| Deployment | Gunicorn · Render |
+
+---
+
+## Team
+
+**Group 22 — CS5202 GenAI and LLM, Spring 2026**
