@@ -1,10 +1,9 @@
 <div align="center">
 
-# 🔍 Privacy Policy Grader
+#Privacy Policy Grader
 
 ### *Know what you're agreeing to — before you click "I Accept"*
 
-[![Live Demo](https://img.shields.io/badge/_Live_Demo-privacy--policy--grader.onrender.com-6366f1?style=for-the-badge)](https://privacy-policy-grader.onrender.com/)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![Flask](https://img.shields.io/badge/Flask-3.0-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
 [![Gemini](https://img.shields.io/badge/Google_Gemini-1.5_Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://deepmind.google/technologies/gemini/)
