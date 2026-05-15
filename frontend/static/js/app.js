@@ -491,18 +491,18 @@ function renderNLPMetrics(metrics) {
   if (!grid) return;
 
   const items = [
-    { icon: '📝', label: 'Word Count',         val: (metrics.word_count||0).toLocaleString() },
-    { icon: '📖', label: 'Sentences',           val: (metrics.sentence_count||0).toLocaleString() },
-    { icon: '📏', label: 'Avg Sentence Len',    val: metrics.avg_sentence_length ? `${metrics.avg_sentence_length} words` : '—' },
-    { icon: '📊', label: 'Flesch Ease',         val: metrics.flesch_reading_ease != null ? Math.round(metrics.flesch_reading_ease) : '—', sub: '/ 100' },
-    { icon: '🎓', label: 'Reading Grade',       val: metrics.flesch_kincaid_grade != null ? `Grade ${metrics.flesch_kincaid_grade}` : '—' },
-    { icon: '🔤', label: 'Jargon Density',      val: metrics.jargon_density != null ? `${metrics.jargon_density.toFixed(1)}%` : '—' },
-    { icon: '💤', label: 'Passive Voice',       val: metrics.passive_voice_percentage != null ? `${Math.round(metrics.passive_voice_percentage)}%` : '—' },
-    { icon: '✅', label: 'Clause Coverage',     val: metrics.clause_completeness_score != null ? `${Math.round(metrics.clause_completeness_score)}%` : '—' },
-    { icon: '🔗', label: '3rd-party Mentions',  val: metrics.third_party_mentions ?? '—' },
-    { icon: '¶',  label: 'Paragraphs',          val: metrics.paragraph_count ?? '—' },
-    { icon: '🇪🇺', label: 'GDPR Mentions',     val: metrics.gdpr_mentions?.count ?? 0 },
-    { icon: '🇺🇸', label: 'CCPA Mentions',     val: metrics.ccpa_mentions?.count ?? 0 },
+    { icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>', label: 'Word Count', val: (metrics.word_count||0).toLocaleString() },
+    { icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>', label: 'Sentences', val: (metrics.sentence_count||0).toLocaleString() },
+    { icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="20" height="6" rx="2"/><line x1="6" y1="15" x2="6" y2="12"/><line x1="10" y1="15" x2="10" y2="12"/><line x1="14" y1="15" x2="14" y2="12"/><line x1="18" y1="15" x2="18" y2="12"/></svg>', label: 'Avg Sentence Len', val: metrics.avg_sentence_length ? `${metrics.avg_sentence_length} words` : '—' },
+    { icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>', label: 'Flesch Ease', val: metrics.flesch_reading_ease != null ? Math.round(metrics.flesch_reading_ease) : '—', sub: '/ 100' },
+    { icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>', label: 'Reading Grade', val: metrics.flesch_kincaid_grade != null ? `Grade ${metrics.flesch_kincaid_grade}` : '—' },
+    { icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>', label: 'Jargon Density', val: metrics.jargon_density != null ? `${metrics.jargon_density.toFixed(1)}%` : '—' },
+    { icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>', label: 'Passive Voice', val: metrics.passive_voice_percentage != null ? `${Math.round(metrics.passive_voice_percentage)}%` : '—' },
+    { icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>', label: 'Clause Coverage', val: metrics.clause_completeness_score != null ? `${Math.round(metrics.clause_completeness_score)}%` : '—' },
+    { icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>', label: '3rd-party Mentions', val: metrics.third_party_mentions ?? '—' },
+    { icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v18"/><path d="M14 3v18"/><path d="M10 12h-3a5 5 0 0 1 0-10h11"/></svg>', label: 'Paragraphs', val: metrics.paragraph_count ?? '—' },
+    { icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>', label: 'GDPR Mentions', val: metrics.gdpr_mentions?.count ?? 0 },
+    { icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>', label: 'CCPA Mentions', val: metrics.ccpa_mentions?.count ?? 0 },
   ];
 
   grid.innerHTML = items.map(({ icon, label, val, sub }) =>
@@ -862,7 +862,7 @@ function generateClientPDF(data) {
   ${verification.summary ? `<p style="font-size:.88rem;color:#786F66;margin-top:10px">${verification.summary}</p>` : ''}` : ''}
 
   <div class="footer">
-    <p>Generated by <strong>PrivacyGrader</strong> · Custom NLP + Google Gemini · ${new Date().getFullYear()}</p>
+    <p>Generated by <strong>Privy</strong> · Custom NLP + Google Gemini · ${new Date().getFullYear()}</p>
   </div>
 </div>
 </body>
@@ -1040,6 +1040,7 @@ async function analyzeText() {
 // ── Recent Analyses ───────────────────────────────────────────────────────────
 
 async function loadRecentAnalyses() {
+  if (sessionStorage.getItem('hideRecent') === 'true') return;
   try {
     const resp = await fetch('/api/benchmarks');
     const json = await resp.json();
@@ -1101,6 +1102,8 @@ async function loadRecentAnalyses() {
 function clearRecentAnalyses() {
   const section = $('recent-section');
   if (section) section.remove();
+  // Remember that user cleared it so it doesn't pop back up this session
+  sessionStorage.setItem('hideRecent', 'true');
 }
 
 function quickLoadUrl(url) {
@@ -1155,6 +1158,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const theme = savedTheme || 'light';
   document.body.dataset.theme = theme;
   _updateThemeIcons(theme);
+
+  // Clear inputs and filters that browsers might persist across reloads
+  if ($('url-input')) $('url-input').value = '';
+  if ($('paste-text')) $('paste-text').value = '';
+  if ($('paste-company')) $('paste-company').value = '';
+  if ($('paste-source-url')) $('paste-source-url').value = '';
+  if ($('rf-filter')) $('rf-filter').value = 'all';
 
   loadBenchmarks();
   // NOTE: loadRecentAnalyses() NOT called on init — results only show

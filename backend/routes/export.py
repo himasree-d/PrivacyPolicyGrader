@@ -91,11 +91,7 @@ def _build_html_report(row: dict) -> str:
     ) if user_rights else "<tr><td colspan='2' style='color:#786F66'>No rights information found.</td></tr>"
 
     def data_icon(t):
-        t = (t or "").lower()
-        icons = {"location":"📍","email":"📧","name":"👤","payment":"💳","device":"📱","cookies":"🍪","analytics":"📊","browsing":"🌐","health":"❤️","biometric":"🔒","financial":"💰"}
-        for k, i in icons.items():
-            if k in t: return i
-        return "📋"
+        return "•"
 
     collected_html = "".join(
         f"""<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#F6F3EE;border-radius:8px;margin-bottom:8px;border:1px solid #D4CEC4">
@@ -117,21 +113,20 @@ def _build_html_report(row: dict) -> str:
 
     compliance_html = "".join(
         f"""<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#EAF6EE;border:1px solid #90C8A0;border-radius:8px;margin-bottom:8px">
-          <span style="font-size:1rem">✅</span>
-          <span style="font-size:.88rem;font-weight:600;color:#1E4828">{c}</span>
+          <span style="font-size:.88rem;font-weight:600;color:#1E4828">✓ {c}</span>
         </div>"""
         for c in compliance
     ) if compliance else "<p style='color:#786F66;font-size:.88rem'>No compliance indicators detected.</p>"
 
     metric_items = [
-        ("📝 Word Count",       str((metrics.get("word_count") or 0)),        "words"),
-        ("📖 Sentences",        str(metrics.get("sentence_count") or "—"),    ""),
-        ("🎓 Reading Grade",    f"Grade {metrics.get('flesch_kincaid_grade')}" if metrics.get("flesch_kincaid_grade") else "—", ""),
-        ("📊 Flesch Ease",      str(round(metrics.get("flesch_reading_ease") or 0)),  "/ 100"),
-        ("🔤 Jargon Density",   f"{(metrics.get('jargon_density') or 0):.1f}%", ""),
-        ("💤 Passive Voice",    f"{round(metrics.get('passive_voice_percentage') or 0)}%", ""),
-        ("✅ Clause Coverage",  f"{round(metrics.get('clause_completeness_score') or 0)}%", ""),
-        ("⚠️ Dark Pattern",     f"{round(dark)} / 100",                        ""),
+        ("Word Count",       str((metrics.get("word_count") or 0)),        "words"),
+        ("Sentences",        str(metrics.get("sentence_count") or "—"),    ""),
+        ("Reading Grade",    f"Grade {metrics.get('flesch_kincaid_grade')}" if metrics.get("flesch_kincaid_grade") else "—", ""),
+        ("Flesch Ease",      str(round(metrics.get("flesch_reading_ease") or 0)),  "/ 100"),
+        ("Jargon Density",   f"{(metrics.get('jargon_density') or 0):.1f}%", ""),
+        ("Passive Voice",    f"{round(metrics.get('passive_voice_percentage') or 0)}%", ""),
+        ("Clause Coverage",  f"{round(metrics.get('clause_completeness_score') or 0)}%", ""),
+        ("Dark Pattern",     f"{round(dark)} / 100",                        ""),
     ]
     metrics_grid = "".join(
         f"""<div style="background:#F6F3EE;border-radius:10px;padding:14px 16px;border:1px solid #D4CEC4">
@@ -228,40 +223,40 @@ def _build_html_report(row: dict) -> str:
     </div>
   </div>
 
-  <h2>📊 Dimension Scores</h2>
+  <h2>Dimension Scores</h2>
   <table>
     <tr><th>Dimension</th><th>Score</th><th style="width:55%">Progress</th></tr>
     {dim_rows}
   </table>
 
-  <h2>📝 Summary</h2>
+  <h2>Summary</h2>
   <div class="summary-box">{findings.get('summary') or 'No summary available.'}</div>
 
-  <h2>🚩 Red Flags ({len(flags)} found)</h2>
+  <h2>Red Flags ({len(flags)} found)</h2>
   <table>
     <tr><th>Severity</th><th>Issue</th><th>Details</th></tr>
     {flag_rows}
   </table>
 
-  <h2>⚖️ User Rights</h2>
+  <h2>User Rights</h2>
   <table>
     <tr><th>Right</th><th>Status</th></tr>
     {rights_rows}
   </table>
 
-  <h2>📦 Data Collected</h2>
+  <h2>Data Collected</h2>
   {collected_html}
 
-  <h2>🔗 Data Shared With</h2>
+  <h2>Data Shared With</h2>
   {shared_html}
 
-  <h2>✅ Compliance Indicators</h2>
+  <h2>Compliance Indicators</h2>
   {compliance_html}
 
-  <h2>📊 NLP Metrics</h2>
+  <h2>NLP Metrics</h2>
   <div class="metrics-grid">{metrics_grid}</div>
 
-  {f'''<h2>🔬 Claim Verification</h2>
+  {f'''<h2>Claim Verification</h2>
   <div class="verify-row">
     <div class="verify-box"><div class="verify-val">{conf_pct}%</div><div class="verify-label">Confidence</div></div>
     <div class="verify-box"><div class="verify-val">{verify.get("total_claims",0)}</div><div class="verify-label">Claims Verified</div></div>
@@ -270,7 +265,7 @@ def _build_html_report(row: dict) -> str:
   {f'<p style="font-size:.88rem;color:#786F66;margin-top:10px;line-height:1.65">{verify.get("summary","")}</p>' if verify.get("summary") else ""}''' if verify.get("total_claims") else ""}
 
   <div class="footer">
-    <span>Privacy Policy Grader · Custom NLP + Google Gemini</span>
+    <span>Privy · Custom NLP + Google Gemini</span>
     <span>{generated}</span>
   </div>
 </div>
@@ -286,7 +281,7 @@ def _build_text_report(row: dict) -> str:
 
     lines = [
         "=" * 64,
-        "PRIVACY POLICY GRADER — ANALYSIS REPORT",
+        "PRIVY — ANALYSIS REPORT",
         "=" * 64,
         f"Company      : {row.get('company_name', 'Unknown')}",
         f"URL          : {row.get('url', '')}",
@@ -328,7 +323,7 @@ def _build_text_report(row: dict) -> str:
     lines += ["", "SUMMARY", "-" * 40,
               findings.get("summary") or "No summary available.", "",
               "=" * 64,
-              "Generated by Privacy Policy Grader · Custom NLP + Google Gemini",
+              "Generated by Privy · Custom NLP + Google Gemini",
               "=" * 64]
     return "\n".join(lines)
 
