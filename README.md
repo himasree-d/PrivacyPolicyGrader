@@ -112,61 +112,61 @@ The system follows a clean linear pipeline: raw URL in → structured analysis o
 
 ```
                         ┌─────────────────────────────────┐
-                        │         User Input (URL)         │
+                        │         User Input (URL)        │
                         └──────────────┬──────────────────┘
                                        │
                                        ▼
                         ┌─────────────────────────────────┐
-                        │         URL Validator            │  ← path heuristics
-                        │       url_validator.py           │    robots.txt scan
+                        │         URL Validator           │  ← path heuristics
+                        │       url_validator.py          │    robots.txt scan
                         └──────────────┬──────────────────┘    homepage crawl
                                        │ validated policy URL
                                        ▼
                         ┌─────────────────────────────────┐
-                        │         Web Scraper              │  ← BeautifulSoup4
-                        │          scraper.py              │    boilerplate removal
+                        │         Web Scraper             │  ← BeautifulSoup4
+                        │          scraper.py             │    boilerplate removal
                         └──────────────┬──────────────────┘    Selenium fallback
                                        │ clean policy text
                                        ▼
                         ┌─────────────────────────────────┐
-                        │         Preprocessor             │  ← 18+ NLP metrics
-                        │        preprocessor.py           │    (readability, jargon,
+                        │         Preprocessor            │  ← 18+ NLP metrics
+                        │        preprocessor.py          │    (readability, jargon,
                         └──────┬───────────────┬──────────┘     dark patterns, VADER)
                                │               │
                 metrics dict   │               │   raw text
                                ▼               ▼
               ┌────────────────────┐   ┌──────────────────────┐
-              │   Grading Engine   │   │     LLM Service       │
-              │  grading_engine.py │   │    llm_service.py     │  ← GEMINI API
-              │  (5 dimensions,    │   │  (data types, rights, │    called ONCE
-              │   9 sub-scorers)   │   │   red flags, summary) │
+              │   Grading Engine   │   │     LLM Service      │
+              │  grading_engine.py │   │    llm_service.py    │  ← GEMINI API
+              │  (5 dimensions,    │   │  (data types, rights,│    called ONCE
+              │   9 sub-scorers)   │   │   red flags, summary)│
               └────────┬───────────┘   └──────────┬───────────┘
                        │                           │
                 scores │               findings    │
                        │                           ▼
                        │               ┌──────────────────────┐
-                       │               │    Claim Verifier     │  ← difflib fuzzy match
-                       │               │     verifier.py       │    hallucination guard
+                       │               │    Claim Verifier    │  ← difflib fuzzy match
+                       │               │     verifier.py      │    hallucination guard
                        │               └──────────┬───────────┘
                        │                           │ verified findings
                        └──────────────┬────────────┘
                                       │
                                       ▼
                         ┌─────────────────────────────────┐
-                        │          Database                │  ← SQLAlchemy ORM
-                        │         db_manager.py            │    caching + benchmarks
+                        │          Database               │  ← SQLAlchemy ORM
+                        │         db_manager.py           │    caching + benchmarks
                         └──────────────┬──────────────────┘
                                        │ JSON response
                                        ▼
                         ┌─────────────────────────────────┐
-                        │          Flask API               │  ← /api/analyze
-                        │           routes/                │    /api/compare
+                        │          Flask API              │  ← /api/analyze
+                        │           routes/               │    /api/compare
                         └──────────────┬──────────────────┘    /api/benchmarks
                                        │
                                        ▼
                         ┌─────────────────────────────────┐
-                        │           Frontend               │  ← Canvas radar chart
-                        │      static/ + templates/        │    animated grade arc
+                        │           Frontend              │  ← Canvas radar chart
+                        │      static/ + templates/       │    animated grade arc
                         └─────────────────────────────────┘    vanilla JS
 ```
 
