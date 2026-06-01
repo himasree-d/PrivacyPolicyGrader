@@ -1,4 +1,4 @@
-<div align="center">
+<img width="1468" height="835" alt="image" src="https://github.com/user-attachments/assets/d671ac91-b393-45d2-8442-7d509df9fc28" /><div align="center">
 
 #Privacy Policy Grader
 
@@ -27,7 +27,8 @@ Paste a URL. Get a grade. Understand your rights.
 
 | | |
 |:---:|:---:|
-| ![Homepage — URL Input & Grade Result](./screenshots/screenshot-1.png) | ![Radar Chart & Score Breakdown](./screenshots/screenshot-2.png) |
+| ![Homepage — URL Input & Grade Result](<img width="1468" height="835" alt="image" src="https://github.com/user-attachments/assets/a998420e-8eff-466a-8d13-0652a4009af4" />
+) | ![Radar Chart & Score Breakdown](./screenshots/screenshot-2.png) |
 | *Homepage: paste any privacy policy URL and get an instant grade* | *5-dimension radar chart showing exactly where policies succeed or fail* |
 | ![Side-by-Side Policy Comparison](./screenshots/screenshot-3.png) | ![Red Flags & Dark Pattern Detection](./screenshots/screenshot-4.png) |
 | *Compare two companies' policies head-to-head* | *AI-detected red flags with source text verification* |
