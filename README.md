@@ -28,9 +28,12 @@ Paste a URL. Get a grade. Understand your rights.
 | | |
 |:---:|:---:|
 | ![Homepage — URL Input & Grade Result](<img width="1468" height="835" alt="image" src="https://github.com/user-attachments/assets/a998420e-8eff-466a-8d13-0652a4009af4" />
-) | ![Radar Chart & Score Breakdown](./screenshots/screenshot-2.png) |
+) | ![Radar Chart & Score Breakdown](<img width="1470" height="833" alt="image" src="https://github.com/user-attachments/assets/1627ebb9-b278-4954-907f-b3799591cec5" />
+) |
 | *Homepage: paste any privacy policy URL and get an instant grade* | *5-dimension radar chart showing exactly where policies succeed or fail* |
-| ![Side-by-Side Policy Comparison](./screenshots/screenshot-3.png) | ![Red Flags & Dark Pattern Detection](./screenshots/screenshot-4.png) |
+| ![Side-by-Side Policy Comparison](<img width="1470" height="831" alt="image" src="https://github.com/user-attachments/assets/8c55358a-f3cb-47b0-920b-90fce800ba10" />
+) | ![Red Flags & Dark Pattern Detection](<img width="1470" height="831" alt="image" src="https://github.com/user-attachments/assets/11bfd570-f667-4946-98c7-d24995b25e6f" />
+) |
 | *Compare two companies' policies head-to-head* | *AI-detected red flags with source text verification* |
 
 </div>
