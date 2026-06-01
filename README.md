@@ -20,7 +20,7 @@ Paste a URL. Get a grade. Understand your rights.
 
 </div>
 
-## 📸 Screenshots
+##  Screenshots
 
 <div align="center">
 
@@ -37,7 +37,7 @@ Paste a URL. Get a grade. Understand your rights.
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [The Problem](#-the-problem)
 - [What It Does](#-what-it-does)
@@ -54,7 +54,7 @@ Paste a URL. Get a grade. Understand your rights.
 
 ---
 
-## 🚨 The Problem
+##  The Problem
 
 Privacy policies are **deliberately unreadable**. The average privacy policy is:
 
@@ -69,7 +69,7 @@ The result? 91% of people agree to terms they have never read. Companies exploit
 
 ---
 
-## ✅ What It Does
+##  What It Does
 
 **Input:** Any privacy policy URL (e.g. `https://google.com/privacy`)
 
@@ -85,7 +85,7 @@ The result? 91% of people agree to terms they have never read. Companies exploit
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 <div align="center">
 
@@ -106,7 +106,7 @@ The result? 91% of people agree to terms they have never read. Companies exploit
 
 ---
 
-## 🏗 Architecture
+##  Architecture
 
 The system follows a clean linear pipeline: raw URL in → structured analysis out. Every stage is a separate, testable module.
 
@@ -172,7 +172,7 @@ The system follows a clean linear pipeline: raw URL in → structured analysis o
 
 ---
 
-## 📊 Grading Methodology
+##  Grading Methodology
 
 The overall score is a **weighted average across 5 dimensions**. Each dimension has 3 sub-scorers (each 0–10), averaged to a 0–100 dimension score.
 
@@ -204,7 +204,7 @@ The overall score is a **weighted average across 5 dimensions**. Each dimension 
 
 ---
 
-## 🔬 Core Features Deep Dive
+##  Core Features Deep Dive
 
 ### 1. Smart Web Scraper
 The scraper doesn't just fetch a URL — it actively finds the privacy policy even when none is explicitly given.
@@ -246,7 +246,7 @@ Every analysis can be exported as a structured JSON report or a formatted PDF, s
 
 ---
 
-## 🤝 Our Code vs. LLM — Contribution Breakdown
+##  Our Code vs. LLM — Contribution Breakdown
 
 This table makes explicit what was engineered by the team versus what the LLM provides at runtime. This distinction is the core value proposition: the LLM handles semantic understanding; everything else is custom-built Python.
 
@@ -274,7 +274,7 @@ This table makes explicit what was engineered by the team versus what the LLM pr
 
 ---
 
-## 📡 API Reference
+##  API Reference
 
 All endpoints return JSON with the envelope: `{ "success": bool, "data": ..., "error": ... }`
 
@@ -366,7 +366,7 @@ Export a saved analysis as PDF or JSON. Accepts query param `?format=pdf` or `?f
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 privacy-policy-grader/
@@ -442,7 +442,7 @@ privacy-policy-grader/
 
 ---
 
-## 🚀 Getting Started Locally
+##  Getting Started Locally
 
 ### Prerequisites
 
@@ -513,7 +513,7 @@ python -m http.server 8080 --directory samples/
 
 ---
 
-## ☁️ Deployment
+##  Deployment
 
 The app is deployed on **Render** (free tier) via `render.yaml`.
 
@@ -549,7 +549,7 @@ services:
 
 ---
 
-## 🧪 Running Tests
+##  Running Tests
 
 ```bash
 cd backend
@@ -589,7 +589,7 @@ pytest ../tests/ --cov=. --cov-report=term-missing -v
 
 ---
 
-## 🌐 Live Demo
+##  Live Demo
 
 **Try it now:** [https://privacy-policy-grader.onrender.com/](https://privacy-policy-grader.onrender.com/)
 
@@ -601,7 +601,7 @@ Some policies to try:
 
 ---
 
-## 📄 License
+##  License
 
 This project is licensed under the **MIT License** — see the [LICENSE](./LICENSE) file for details.
 
