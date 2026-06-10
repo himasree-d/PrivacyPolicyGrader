@@ -295,6 +295,9 @@ OUTPUT FORMAT — return ONLY valid JSON matching this schema exactly:
         Validated findings dict (matches schema above).
         If DEMO_MODE or API failure → returns realistic mock response.
         """
+
+        print(f"[Gemini] analyze_with_gemini called — demo={self._demo}, client={self._client is not None}")
+
         # Demo mode — return mock without calling API
         if self._demo or self._client is None:
             print("[llm_service] Running in DEMO MODE — returning mock response.")
