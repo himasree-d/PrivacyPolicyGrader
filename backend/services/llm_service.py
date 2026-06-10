@@ -15,6 +15,7 @@ Responsibilities
 
 import json
 import re
+import os
 from typing import Any, Dict, List, Optional
 
 # Severity ordering for red flag sorting (lower = more severe)
