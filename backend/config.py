@@ -57,7 +57,7 @@ class Config:
     GEMINI_API_KEY: str | None = os.getenv("GEMINI_API_KEY") or None
 
     # If no API key is set → run in Demo Mode (mock LLM responses)
-    DEMO_MODE: bool = not bool(GEMINI_API_KEY)
+    DEMO_MODE: bool = not bool(os.getenv("GEMINI_API_KEY"))
 
     # ----------------------------------------------------------
     # Database
