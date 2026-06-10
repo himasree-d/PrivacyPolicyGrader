@@ -31,6 +31,9 @@ else:
     # Try sibling .env in backend/ directory
     load_dotenv(dotenv_path=Path(__file__).resolve().parent / ".env")
 
+# Temporary debug — remove after confirming
+print(f"[config] GEMINI_API_KEY found: {bool(os.getenv('GEMINI_API_KEY'))}")
+print(f"[config] .env path tried: {ENV_PATH}, exists: {ENV_PATH.is_file()}")
 
 class Config:
     """
