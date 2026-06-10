@@ -302,8 +302,11 @@ OUTPUT FORMAT — return ONLY valid JSON matching this schema exactly:
 
         prompt = self._build_prompt(policy_text, preprocessor_metrics)
 
+        print(f"[Gemini] Calling API — {len(policy_text)} chars of policy text...")
+        
         try:
             response = self._client.generate_content(prompt)
+            print(f"[Gemini] Response received — {len(response.text)} chars")
             raw_text = response.text.strip()
 
             # Strip markdown code fences if present
