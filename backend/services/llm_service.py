@@ -135,7 +135,6 @@ class PrivacyAnalyzer:
                     generation_config={
                         "temperature": Config.GEMINI_TEMPERATURE,
                         "max_output_tokens": Config.GEMINI_MAX_TOKENS,
-                        "response_mime_type": "application/json",
                     },
                 )
             except Exception as exc:
