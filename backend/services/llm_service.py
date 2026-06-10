@@ -121,12 +121,14 @@ class PrivacyAnalyzer:
 
     def __init__(self) -> None:
         self._client = None  # lazy initialisation
-        self._demo = Config.DEMO_MODE
+        self._demo = not bool(os.getenv("GEMINI_API_KEY"))  # read live from env
+        print(f"[llm_service __init__] demo={self._demo}, key_present={bool(os.getenv('GEMINI_API_KEY'))}")
 
         if not self._demo:
             try:
                 import google.generativeai as genai
-                genai.configure(api_key=Config.GEMINI_API_KEY)
+    
+                genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
                 self._client = genai.GenerativeModel(
                     model_name=Config.GEMINI_MODEL,
                     generation_config={
