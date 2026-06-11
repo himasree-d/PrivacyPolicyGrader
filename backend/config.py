@@ -32,7 +32,7 @@ else:
     load_dotenv(dotenv_path=Path(__file__).resolve().parent / ".env")
 
 # Temporary debug — remove after confirming
-print(f"[config] GEMINI_API_KEY found: {bool(os.getenv('GEMINI_API_KEY'))}")
+print(f"[config] GROQ_API_KEY found: {bool(os.getenv('GROQ_API_KEY'))}")
 print(f"[config] .env path tried: {ENV_PATH}, exists: {ENV_PATH.is_file()}")
 
 class Config:
@@ -54,10 +54,10 @@ class Config:
     # ----------------------------------------------------------
     # Google Gemini API
     # ----------------------------------------------------------
-    GEMINI_API_KEY: str | None = os.getenv("GEMINI_API_KEY") or None
+    GROQ_API_KEY: str | None = os.getenv("GROQ_API_KEY") or None
 
     # If no API key is set → run in Demo Mode (mock LLM responses)
-    DEMO_MODE: bool = not bool(os.getenv("GEMINI_API_KEY"))
+    DEMO_MODE: bool = not bool(os.getenv("GROQ_API_KEY"))
 
     # ----------------------------------------------------------
     # Database
