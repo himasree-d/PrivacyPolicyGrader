@@ -100,7 +100,7 @@ class Config:
 
     # Maximum characters of policy text sent to LLM
     # Kept low to stay within Groq free tier TPM limits
-    LLM_MAX_CHARS: int = 10_000
+    LLM_MAX_CHARS: int = 7_000
 
     # ----------------------------------------------------------
     # Application identity
