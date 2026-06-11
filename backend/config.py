@@ -100,7 +100,7 @@ class Config:
     # ----------------------------------------------------------
     # Gemini model parameters
     # ----------------------------------------------------------
-    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "models/gemini-2.0-flash")
+    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "models/gemini-1.5-flash")
     GEMINI_MAX_TOKENS: int = int(os.getenv("GEMINI_MAX_TOKENS", "8192"))
     GEMINI_TEMPERATURE: float = float(os.getenv("GEMINI_TEMPERATURE", "0.2"))
 
