@@ -1,8 +1,13 @@
+<div align="center">
+  <img src="https://your-image-url/privy-logo.png" alt="Privy Logo" width="80"/>
+  
+  # Privy — Privacy Policy Grader
+</div>
 # Privacy Policy Grader
 
 ### *Know what you're agreeing to — before you click "I Accept"*
 
-[![Live Deployment](https://privacy-policy-grader.onrender.com/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://privacy-policy-grader.onrender.com/)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![Flask](https://img.shields.io/badge/Flask-3.0-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
 [![Groq](https://img.shields.io/badge/Groq-LLaMA_3.3_70B-F55036?style=for-the-badge&logo=groq&logoColor=white)](https://groq.com)
