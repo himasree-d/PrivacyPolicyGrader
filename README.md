@@ -1,8 +1,4 @@
-<div align="center">
-  <img src="https://your-image-url/privy-logo.png" alt="Privy Logo" width="80"/>
-  
-  # Privy — Privacy Policy Grader
-</div>
+
 # Privacy Policy Grader
 
 ### *Know what you're agreeing to — before you click "I Accept"*
