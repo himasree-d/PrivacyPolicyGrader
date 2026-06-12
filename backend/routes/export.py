@@ -43,7 +43,7 @@ def _build_html_report(row: dict) -> str:
         if s >= 90: return "A"
         if s >= 80: return "B"
         if s >= 70: return "C"
-        if s >= 60: return "D"
+        if s >= 50: return "D"
         return "F"
 
     dim_label_map = {
