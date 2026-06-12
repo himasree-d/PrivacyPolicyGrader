@@ -1,11 +1,11 @@
-
 # Privacy Policy Grader
 
 ### *Know what you're agreeing to — before you click "I Accept"*
 
+[![Live Deployment](https://privacy-policy-grader.onrender.com/)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![Flask](https://img.shields.io/badge/Flask-3.0-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
-[![Gemini](https://img.shields.io/badge/Google_Gemini-1.5_Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://deepmind.google/technologies/gemini/)
+[![Groq](https://img.shields.io/badge/Groq-LLaMA_3.3_70B-F55036?style=for-the-badge&logo=groq&logoColor=white)](https://groq.com)
 [![SQLite](https://img.shields.io/badge/SQLite-SQLAlchemy_ORM-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://sqlalchemy.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![Tests](https://img.shields.io/badge/Tests-23_Passing-22c55e?style=for-the-badge&logo=pytest)](./tests/)
@@ -92,7 +92,7 @@ The result? 91% of people agree to terms they have never read. Companies exploit
 | Layer | Technology | Purpose |
 |:------|:-----------|:--------|
 | **Backend Framework** | Flask 3.0 + Gunicorn | Web server, API routing, Jinja2 templating |
-| **AI / LLM** | Google Gemini 1.5 Flash | Semantic extraction of data types, sharing recipients, user rights |
+| **AI / LLM** | Groq (LLaMA 3.3 70B Versatile) | Semantic extraction of data types, sharing recipients, user rights |
 | **NLP Pipeline** | NLTK, textstat, custom Python | 18+ readability metrics, jargon detection, dark pattern regex |
 | **Web Scraping** | BeautifulSoup4 + Selenium | Multi-strategy policy text extraction with JS-rendering fallback |
 | **Database** | SQLite + SQLAlchemy ORM | Analysis caching, industry benchmarks, grade distributions |
@@ -137,7 +137,7 @@ The system follows a clean linear pipeline: raw URL in → structured analysis o
                                ▼               ▼
               ┌────────────────────┐   ┌──────────────────────┐
               │   Grading Engine   │   │     LLM Service      │
-              │  grading_engine.py │   │    llm_service.py    │  ← GEMINI API
+              │  grading_engine.py │   │    llm_service.py    │  ← GROQ API
               │  (5 dimensions,    │   │  (data types, rights,│    called ONCE
               │   9 sub-scorers)   │   │   red flags, summary)│
               └────────┬───────────┘   └──────────┬───────────┘
@@ -222,15 +222,15 @@ All of the following are computed entirely with custom Python — no AI involved
 - **Dark pattern detection:** 15+ categories of manipulative language patterns (vague data purposes, buried opt-outs, forced consent bundling, etc.) using `@dataclass PatternSpec` rules with severity scores
 - **Text metrics:** VADER sentiment analysis, passive voice percentage, type-token ratio (vocabulary diversity), clause completeness scoring, paragraph structure analysis
 
-### 3. LLM Integration (Gemini 1.5 Flash)
-Gemini is called in **exactly one file** (`llm_service.py`) for things only a language model can do well:
+### 3. LLM Integration (Groq — LLaMA 3.3 70B Versatile)
+Groq is called in **exactly one file** (`llm_service.py`) for things only a language model can do well:
 
 - Identifying *specific* data types collected (e.g. "biometric data," "purchase history")
 - Naming sharing recipients (e.g. "advertising partners," "data brokers")
 - Extracting user rights mentions and their accessibility
 - Generating a plain-English summary verdict
 
-> **Demo Mode:** The app is fully functional without a Gemini API key — it serves realistic mock responses so you can explore all features offline.
+> **Demo Mode:** The app is fully functional without a Groq API key — it serves realistic mock responses so you can explore all features offline.
 
 ### 4. Hallucination Guard — ClaimVerifier
 Every AI-generated finding is cross-checked against the original policy text using `difflib.SequenceMatcher` fuzzy matching. Claims that can't be grounded in the source text are flagged as potential hallucinations and their confidence score is penalised. This prevents the LLM from inventing rights or protections that don't exist.
@@ -252,7 +252,7 @@ This table makes explicit what was engineered by the team versus what the LLM pr
 
 <div align="center">
 
-| Component | Our Code | Gemini LLM |
+| Component | Our Code | Groq LLM |
 |:----------|:--------:|:----------:|
 | Readability formulas (FRE, FKGL, SMOG, ARI, Coleman-Liau) | ✔︎ | 𐄂 |
 | Custom syllable counter | ✔︎ | 𐄂 |
@@ -386,7 +386,7 @@ privacy-policy-grader/
 │   ├── services/
 │   │   ├── scraper.py              # BeautifulSoup4 + Selenium multi-strategy scraper
 │   │   ├── preprocessor.py         # Aggregates all 18+ NLP metrics into a single dict
-│   │   ├── llm_service.py          # ← ONLY file that calls Gemini API
+│   │   ├── llm_service.py          # ← ONLY file that calls Groq API
 │   │   ├── grading_engine.py       # Weighted 5-dimension scoring, grade boundaries
 │   │   └── verifier.py             # difflib fuzzy-match hallucination guard
 │   │
@@ -448,7 +448,7 @@ privacy-policy-grader/
 
 - Python 3.10 or higher
 - Google Chrome (for Selenium JS-rendering fallback — optional)
-- A Google Gemini API key (optional — the app runs in Demo Mode without one)
+- A Groq API key (optional — the app runs in Demo Mode without one, get a free key at [console.groq.com](https://console.groq.com))
 
 ### Step 1 — Clone & Install
 
@@ -468,15 +468,15 @@ Open `.env` and set your values:
 
 ```env
 # Required for full AI features — leave blank for Demo Mode
-GEMINI_API_KEY=your_key_here
+GROQ_API_KEY=your_key_here
 
 # Optional overrides
 FLASK_DEBUG=True
-GEMINI_MODEL=gemini-1.5-flash
+GROQ_MODEL=llama-3.3-70b-versatile
 RATE_LIMIT_PER_MIN=60
 ```
 
-> **Demo Mode:** If `GEMINI_API_KEY` is left blank, the app serves realistic mock AI responses. All NLP features (readability, jargon, dark patterns) work fully. A "Demo Mode" banner is shown in the UI.
+> **Demo Mode:** If `GROQ_API_KEY` is left blank, the app serves realistic mock AI responses. All NLP features (readability, jargon, dark patterns) work fully. A "Demo Mode" banner is shown in the UI.
 
 ### Step 3 — Download NLTK Data
 
@@ -527,12 +527,12 @@ services:
     buildCommand: pip install -r backend/requirements.txt
     startCommand: gunicorn --chdir backend "app:create_app()" --bind 0.0.0.0:$PORT --workers 2 --timeout 120
     envVars:
-      - key: GEMINI_API_KEY
+      - key: GROQ_API_KEY
         sync: false        # Set manually in Render dashboard
       - key: FLASK_DEBUG
         value: False
-      - key: GEMINI_MODEL
-        value: gemini-1.5-flash
+      - key: GROQ_MODEL
+        value: llama-3.3-70b-versatile
       - key: PYTHON_VERSION
         value: 3.11.9
 ```
@@ -542,7 +542,7 @@ services:
 1. Fork this repository
 2. Connect it to [Render](https://render.com) — select "New Web Service" → point to your fork
 3. Render auto-detects `render.yaml` and configures everything
-4. Add your `GEMINI_API_KEY` in the Render dashboard under **Environment**
+4. Add your `GROQ_API_KEY` in the Render dashboard under **Environment** (get a free key at [console.groq.com](https://console.groq.com))
 5. Hit **Deploy** — live in ~3 minutes
 
 > **Note on cold starts:** Render's free tier spins down after 15 minutes of inactivity. The first request after a cold start may take 30–60 seconds. Paid plans eliminate this.
